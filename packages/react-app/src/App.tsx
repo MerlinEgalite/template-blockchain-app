@@ -8,7 +8,7 @@ import { web3Modal, logoutOfWeb3Modal } from './utils/web3Modal'
 import logo from "./ethereumLogo.png"
 
 import { addresses, abis } from "./contracts/src"
-// import counterArtficats from './artifacts/Counter.json'
+import counterArtficats from './artifacts/Counter.json'
 import GET_TRANSFERS from "./graphql/subgraph"
 
 async function readOnChainData() {
@@ -27,9 +27,9 @@ async function testContract() {
   // const defaultProvider = ethers.getDefaultProvider()
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const signer = provider.getSigner(0)
-  console.log(signer)
-  // const counter = new ethers.Contract(signer, abis.counter.abi, defaultProvider)
-  // counter.functions.countUp()
+  const counter = new ethers.Contract('0xD7b3D6e8Ee6658aABa8F7069745A9E156743C66C', counterArtficats.abi, signer)
+  console.log(counter)
+  counter.countUp()
   // console.log(counter.functions.getCount())
 }
 

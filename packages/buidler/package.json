@@ -1,0 +1,37 @@
+{
+  "name": "buidler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "npm run compile && npx buidler typechain",
+    "compile": "npx buidler compile",
+    "test": "npx buidler test"
+  },
+  "dependencies": {
+    "buidler-typechain": "^0.1.1",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "ethereum-waffle": "^3.1.0",
+    "ts-generator": "^0.0.8",
+    "ts-node": "^9.0.0",
+    "typechain": "^2.0.0",
+    "typescript": "^4.0.2"
+  },
+  "devDependencies": {
+    "@nomiclabs/buidler": "^1.4.7",
+    "@nomiclabs/buidler-ethers": "^2.0.0",
+    "@nomiclabs/buidler-etherscan": "^2.0.1",
+    "@nomiclabs/buidler-waffle": "^2.1.0",
+    "@typechain/ethers-v4": "^1.0.1",
+    "@typechain/truffle-v4": "^2.0.3",
+    "@typechain/truffle-v5": "^2.0.2",
+    "@typechain/web3-v1": "^1.0.0",
+    "ethers": "^5.0.14"
+  },
+  "author": "",
+  "license": "ISC"
+}
