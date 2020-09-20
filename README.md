@@ -1,4 +1,15 @@
-This project was bootstrapped with [Create Eth App](https://github.com/paulrberg/create-eth-app).
+This project is based on [Create Eth App](https://github.com/paulrberg/create-eth-app) and this article [The New Solidity Dev Stack: Buidler + Ethers + Waffle + Typescript](https://medium.com/@rahulsethuram/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae).
+It's in Typescript for better maintainability in the long run.
+It's a template for a complete Typescript React App running Smart contracts.
+
+## Tech Stack
+
+- Buidler
+- Waffle
+- Ethers
+- Typescript
+- GraphQL
+- React
 
 ## Project Structure
 
@@ -8,41 +19,71 @@ Workspaces makes it possible to setup multiple packages in such a way that we on
 a single pass. Dependencies are hoisted at the root.
 
 ```
-my-eth-app
+template-blockchain-app
+|──.env
 ├── README.md
 ├── node_modules
 ├── package.json
 ├── .gitignore
 └── packages
-    ├── contracts
-    │   ├── README.json
-    │   ├── package.json
-    │   └── src
-    │       ├── abis
-    │       │   ├── erc20.json
-    │       │   └── ownable.json
-    │       ├── addresses.js
-    │       └── index.js
+    ├── buidler
+    │   ├── buidler.config.ts
+    │   ├── cache
+    │   ├── contracts
+    │   │   ├── Counter.sol
+    │   │   └── Invest.sol
+    │   ├── package-lock.json
+    │   ├── package.json
+    │   ├── scripts
+    │   │   └── deploy.ts
+    │   ├── test
+    │   │   └── counter.ts
+    │   ├── tsconfig.json
+    │   └── typechain
+    │       └── index.d.ts
     ├── react-app
     │   ├── README.md
-    │   ├── node_modules
-    │   ├── package.json
-    │   ├── public
-    │   │   ├── favicon.ico
-    │   │   ├── index.html
-    │   │   ├── logo192.png
-    │   │   ├── logo512.png
-    │   │   ├── manifest.json
-    │   │   └── robots.txt
-    │   └── src
-    │       ├── App.css
-    │       ├── App.js
-    │       ├── App.test.js
-    │       ├── ethereumLogo.svg
-    │       ├── index.css
-    │       ├── index.js
-    │       ├── serviceWorker.js
-    │       └── setupTests.js
+    │   ├── package-lock.json
+    │   ├── package.json
+    │   ├── public
+    │   │   ├── favicon.ico
+    │   │   ├── index.html
+    │   │   ├── logo192.png
+    │   │   ├── logo512.png
+    │   │   ├── manifest.json
+    │   │   └── robots.txt
+    │   ├── scripts
+    │   │   └── ipfs.ts
+    │   ├── src
+    │   │   ├── App.test.js
+    │   │   ├── App.tsx
+    │   │   ├── components
+    │   │   │   └── index.ts
+    │   │   ├── contracts
+    │   │   │   ├── README.md
+    │   │   │   ├── package.json
+    │   │   │   └── src
+    │   │   │       ├── abis
+    │   │   │       │   ├── erc20.json
+    │   │   │       │   └── ownable.json
+    │   │   │       ├── abis.ts
+    │   │   │       ├── addresses.ts
+    │   │   │       ├── artifacts
+    │   │   │       │   ├── Counter.json
+    │   │   │       │   ├── Invest.json
+    │   │   │       │   └── console.json
+    │   │   │       └── index.ts
+    │   │   ├── ethereumLogo.png
+    │   │   ├── graphql
+    │   │   │   └── subgraph.ts
+    │   │   ├── index.css
+    │   │   ├── index.tsx
+    │   │   ├── react-app-env.d.ts
+    │   │   ├── setupTests.js
+    │   │   ├── tsconfig.json
+    │   │   └── utils
+    │   │       └── web3Modal.ts
+    │   └── tsconfig.json
     └── subgraph
         ├── README.md
         ├── abis
@@ -58,9 +99,25 @@ my-eth-app
 
 Owing to this dependency on Yarn Workspaces, Create Eth App can't be used with npm.
 
-## Available Scripts
+## Available Scripts and steps to run the project
 
-In the project directory, you can run:
+### Builder
+
+In the ```buidler``` directory you can write your Smart Contracts in Solidty.
+I use Infura to deploy the contracts.
+
+So first in a ```.env``` file you can set your INFURA_ID, INFURA_API_KEY (you get from Infura) and your ROPSTEN_PRIVATE_KEY (which is the secret key of wallet account - never disclose it!!). Use Metamask for simplicity.
+When your have written your smart contracts you can deploy them by running:
+
+```npx buidler run scripts/deploy.ts --network ropsten```
+
+You can verify their adress by running:
+```npx buidler verify-contract --contract-name theNameOfYourContract --address```
+
+Now, you have deployed your contracts on Infura's network. In the ```react-app folder/contracts/src```, it should have created a ```artifacts``` folder, it doesn't exist already. That's where we will get the contract's abi to use in our React App.
+So you just have to copy the adresses of you smart contracts in the ```adresses.ts``` file and update ```abis.ts``` file with the right abis.
+
+Now all is set, you can go to the next step!!
 
 ### React App
 

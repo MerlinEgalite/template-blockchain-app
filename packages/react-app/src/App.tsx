@@ -8,29 +8,15 @@ import { web3Modal, logoutOfWeb3Modal } from './utils/web3Modal'
 import logo from "./ethereumLogo.png"
 
 import { addresses, abis } from "./contracts/src"
-import counterArtficats from './artifacts/Counter.json'
 import GET_TRANSFERS from "./graphql/subgraph"
 
-async function readOnChainData() {
-  // Should replace with the end-user wallet, e.g. Metamask
-  // const defaultProvider = getDefaultProvider()
-  const defaultProvider = ethers.getDefaultProvider()
-  // Create an instance of an ethers.js Contract
-  // Read more about ethers.js on https://docs.ethers.io/v5/api/contract/contract/
-  const ceaErc20 = new ethers.Contract(addresses.ceaErc20, abis.erc20, defaultProvider)
-  // A pre-defined address that owns some CEAERC20 tokens
-  const tokenBalance = await ceaErc20.balanceOf("0x3f8CB69d9c0ED01923F11c829BaE4D9a4CB6c82C")
-  console.log({ tokenBalance: tokenBalance.toString() })
-}
-
 async function testContract() {
-  // const defaultProvider = ethers.getDefaultProvider()
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const signer = provider.getSigner(0)
-  const counter = new ethers.Contract('0xD7b3D6e8Ee6658aABa8F7069745A9E156743C66C', counterArtficats.abi, signer)
-  console.log(counter)
+  const counter = new ethers.Contract(addresses.counter, abis.counter, signer)
   counter.countUp()
-  // console.log(counter.functions.getCount())
+  const count = await counter.getCount()
+  console.log(count)
 }
 
 function WalletButton({ provider, loadWeb3Modal }: any) {
@@ -80,14 +66,10 @@ function App() {
       <Body>
         <Image src={logo} alt="react-logo" />
         <p>
-          Edit <code>packages/react-app/src/App.js</code> and save to reload.
+          Edit <code>packages/react-app/src/App.tsx</code> and save to reload.
         </p>
-        {/* Remove the "hidden" prop and open the JavaScript console in the browser to see what this function does */}
-        <Button onClick={() => readOnChainData()}>
-          Read On-Chain Balance
-        </Button>
         <Button onClick={() => testContract()}>
-          Test a contract
+          Test your contract
         </Button>
         <Link
           href="https://ethereum.org/developers/#getting-started"

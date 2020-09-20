@@ -1,4 +1,5 @@
 import { BuidlerConfig, usePlugin } from '@nomiclabs/buidler/config'
+require('dotenv').config({ path: '../../.env' })
 
 usePlugin('@nomiclabs/buidler-waffle')
 usePlugin('@nomiclabs/buidler-etherscan')
@@ -23,7 +24,7 @@ const config: BuidlerConfig = {
     target: "ethers-v4"
   },
   paths: {
-    artifacts: '../react-app/src/artifacts'
+    artifacts: '../react-app/src/contracts/src/artifacts'
   }
 }
 
