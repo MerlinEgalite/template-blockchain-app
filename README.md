@@ -1,8 +1,10 @@
+# template-blockchain-app
+
 This project is based on [Create Eth App](https://github.com/paulrberg/create-eth-app) and this article [The New Solidity Dev Stack: Buidler + Ethers + Waffle + Typescript](https://medium.com/@rahulsethuram/the-new-solidity-dev-stack-buidler-ethers-waffle-typescript-tutorial-f07917de48ae).
 It's in Typescript for better maintainability in the long run.
 It's a template for a complete Typescript React App running Smart contracts.
 
-## Tech Stack
+## Tech stack
 
 - Buidler
 - Waffle
@@ -190,4 +192,3 @@ Deploys the subgraph to the official Graph Node.<br/>
 Replace `paulrberg/create-eth-app` in the package.json script with your subgraph's name.
 
 You may also want to [read more about the hosted service](https://thegraph.com/docs/quick-start#hosted-service).
-# template-blockchain-app
